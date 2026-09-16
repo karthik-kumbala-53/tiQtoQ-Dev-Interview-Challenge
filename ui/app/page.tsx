@@ -9,7 +9,7 @@ type ChangeAnalysis = {
 };
 
 export default function Home() {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
   const [changeDescription, setChangeDescription] = useState("");
   const [analysis, setAnalysis] = useState<ChangeAnalysis>();
   const [error, setError] = useState("");
@@ -56,7 +56,6 @@ export default function Home() {
             value={changeDescription}
             onChange={(event) => setChangeDescription(event.target.value)}
           />
-          <p className="field-hint">Include the feature, affected users and any important rules.</p>
           <button className="secondary-button" disabled={!changeDescription.trim() || loading}>
             {loading ? "Analysing..." : "Analyse change"}
           </button>

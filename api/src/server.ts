@@ -1,6 +1,6 @@
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 
-import { analyseChange } from "./analyse-change.js";
+import { analyseChangeWithAi } from "./analyse-change.js";
 
 const port = 4000;
 
@@ -35,7 +35,7 @@ createServer(async (request: IncomingMessage, response: ServerResponse) => {
     }
 
     response.writeHead(200, { "Content-Type": "application/json" });
-    response.end(JSON.stringify(analyseChange(description)));
+    response.end(JSON.stringify(await analyseChangeWithAi(description)));
   } catch {
     response.writeHead(400, { "Content-Type": "application/json" });
     response.end(JSON.stringify({ error: "The request could not be analysed." }));
